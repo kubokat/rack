@@ -26,7 +26,7 @@ class App
     if time.errors.empty?
       response("#{time.result}")
     else
-      response("Unknown time format [#{time.errors}]")
+      response("Unknown time format #{time.errors}")
     end
   end
 end
