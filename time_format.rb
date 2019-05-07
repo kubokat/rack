@@ -7,15 +7,11 @@ class TimeFormat
     @formats = []
     @errors = []
     @time_string = time_string
-
-    check_formats
   end
 
   def result
     Time.now.strftime(@formats.join('-'))
   end
-
-  private
 
   def check_formats
     @time_string.split(',').each do |format|

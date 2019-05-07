@@ -2,10 +2,10 @@ class App
   def call(env)
 
     @request = Rack::Request.new(env)
-    @response = Rack::Response.new
-    @time_format = TimeFormat.new(@request.params["format"])
 
     if @request.path_info == "/time"
+      @time_format = TimeFormat.new(@request.params["format"])
+      @time_format.check_formats
       check_time_format(@time_format)
     else
       response("Not found", 404)
@@ -26,7 +26,7 @@ class App
     if time.errors.empty?
       response("#{time.result}")
     else
-      response("Unknown time format #{time.errors}")
+      response("Unknown time format #{time.errors}", 400)
     end
   end
 end
